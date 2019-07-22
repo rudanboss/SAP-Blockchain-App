@@ -16,8 +16,8 @@
 			"version": "0.0.0"
 		},
 		"dataSources": {
-			"ZLOC_COCKPIT_SRV": {
-				"uri": "/sap/opu/odata/sap/ZLOC_COCKPIT_SRV/",
+			"<Your Service Name>": {
+				"uri": "<Your Service URL>",
 				"type": "OData",
 				"settings": {
 					"localUri": "localService/metadata.xml"
