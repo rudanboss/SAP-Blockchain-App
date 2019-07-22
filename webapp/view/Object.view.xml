@@ -1,0 +1,156 @@
+<mvc:View controllerName="eDocument.eDocument.controller.Object" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:uxap="sap.uxap" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:hover="c2r.c2rdcd.custom"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<uxap:ObjectPageLayout id="ideDocObjectLayoutOVP" showAnchorBar="true" upperCaseAnchorBar="false" alwaysShowContentHeader="true"
+		preserveHeaderStateOnScroll="true" headerContentPinnable="true" isChildPage="true" enableLazyLoading="true">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle id="ideDocObjectHeaderOVP">
+				<uxap:expandedHeading>
+					<FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+						<Title id="ObjectHeaderTitleOVP" wrapping="true" class="sapUiTinyMarginEnd sapUiTinyMarginTop"/>
+					</FlexBox>
+				</uxap:expandedHeading>
+				<uxap:snappedHeading>
+					<FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+						<Title id="ObjectHeaderTitleSnappedOVP" wrapping="true" class="sapUiTinyMarginEnd sapUiTinyMarginTop"/>
+					</FlexBox>
+				</uxap:snappedHeading>
+				<uxap:actions>
+					<uxap:ObjectPageHeaderActionButton icon="sap-icon://quality-issue" text="Report Data Issue" press="onHelpPress" tooltip="Report Data Issue"/>
+					<uxap:ObjectPageHeaderActionButton icon="sap-icon://print" text="Print" tooltip="Print" press="onPDFDownload"/>
+				</uxap:actions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+		<uxap:headerContent >
+			<VBox>
+				<Title wrapping="true" text="On Blockchain:" class="sapUiTinyMarginEnd sapUiTinyMarginTop"/>
+			</VBox>
+			<HBox id="idDCDPage2GridLayoutovp" wrap="Wrap" fitContainer="true" alignItems="Stretch">
+				<VBox class="sapUiLargeMarginEnd sapUiTinyMarginTop">
+					<Title id="edocID" titleStyle="H1" level="H1"/>
+				</VBox>
+				<VBox class="sapUiLargeMarginEnd sapUiLargeMarginBegin">
+					<core:Icon id="OnBlockchain" size="40px"/>
+				</VBox>
+			</HBox>
+		</uxap:headerContent>
+		<uxap:sections>
+			<uxap:ObjectPageSection id="idGeneralInformation" title="General Information" showTitle="true" titleUppercase="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection>
+						<VBox>
+							<form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12"
+								adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="3" columnsL="3" columnsM="3"
+								singleContainerFullSize="false">
+								<form:content>
+									<core:Title text="General Information"/>
+									<Label text="Proc. Status Descr."/>
+									<Text text="{ProcessStatusDescription}"/>
+									<Label text="Source Description"/>
+									<Text text="{NetValue}"/>
+									<Label text="Type Description"/>
+									<Text text="{SourceTypeDescription}"/>
+									<Label text="Company Code"/>
+									<Text text="{CompanyCode}"/>
+									<Label text="Country"/>
+									<Text text="{Country}"/>
+									<core:Title text="Dates &amp; Currency"/>
+									<Label text="Posting Date"/>
+									<Text text="{PostingDate}"/>
+									<Label text="Document Date"/>
+									<Text text="{DocumentDate}"/>
+									<Label text="Net Value"/>
+									<Text text="{NetValue}"/>
+									<Label text="Currency"/>
+									<Text text="{Currency}"/>
+									<core:Title text="Change Log"/>
+									<Label text="Created By"/>
+									<Text text="{CreatedByUserName}"/>
+									<Label text="Last Changed By"/>
+									<Text text="{ChangedByUserName}"/>
+								</form:content>
+							</form:SimpleForm>
+						</VBox>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection id="idAttributes" title="Attributes/Hashes" showTitle="true" titleUppercase="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection>
+						<VBox>
+							<Table id="ideAttributeData" inset="true" items="{jsonData>/}">
+								<columns>
+									<Column>
+										<Text text="Attribute"/>
+									</Column>
+									<Column>
+										<Text text="Currrent Hash"/>
+									</Column>
+									<Column>
+										<Text text="Blockchain Hash"/>
+									</Column>
+									<Column>
+										<Text text="Compliant"/>
+									</Column>
+									<!--<Column>-->
+									<!--	<Text text="{i18n>LastChangedOn}"/>-->
+									<!--</Column>-->
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{jsonData>Field}"/>
+											<Text text="{jsonData>TaValue}"/>
+											<Text text="{jsonData>BaValue}"/>
+											<core:Icon src="{= ${jsonData>TaValue} === ${jsonData>BaValue} ? 'sap-icon://sys-enter-2' : 'sap-icon://error'}"
+												color="{= ${jsonData>TaValue} === ${jsonData>BaValue} ? '#2B7D2B' : '#BB0000'}"/>
+											<!--<Text text="{TEXT}"/>-->
+											<!--<ObjectStatus text="{= ${jsonData>TaValue} === ${jsonData>BaValue} ? 'Pending' : 'Submitted' }"-->
+											<!--	state="{= ${detailsModel>SCORE} === ${jsonData>BaValue} ? 'Warning' : 'Success' }"-->
+											<!--	icon="{= ${detailsModel>SCORE} === ${jsonData>BaValue} ? 'sap-icon://pending' : 'sap-icon://accept' }"/>-->
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</VBox>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection id="ideDocumentLog" title="eDocument Log" showTitle="true" titleUppercase="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection>
+						<VBox>
+							<Table id="ideDocLog" inset="true" items="{/ZC2R_I_EdocLog}">
+								<columns>
+									<Column width="50%" demandPopin="true" minScreenWidth="800px">
+										<Text text="Message Class"/>
+									</Column>
+									<Column>
+										<Text text="Message Number"/>
+									</Column>
+									<Column>
+										<Text text="Message Type"/>
+									</Column>
+									<Column>
+										<Text text="Main Message"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{MSGID}"/>
+											<Text text="{MSGNO}"/>
+											<Text text="{MSGTY}"/>
+											<Text text="{TEXT}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</VBox>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+	</uxap:ObjectPageLayout>
+</mvc:View>

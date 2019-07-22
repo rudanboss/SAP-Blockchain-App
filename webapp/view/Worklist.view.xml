@@ -1,0 +1,73 @@
+<mvc:View controllerName="eDocument.eDocument.controller.Worklist" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:uxap="sap.uxap" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form" xmlns:f="sap.f" xmlns:l="sap.ui.layout" xmlns:mc="sap.suite.ui.microchart"
+	xmlns:customdata="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<!--<Shell id="shell">-->
+	<!--	<App id="app">-->
+	<!--		<pages>-->
+	<Page id="page" title="{i18n>title}">
+		<content>
+			<smartFilterBar:SmartFilterBar id="ismartFilterBarId" entitySet="ZC2R_C_HashedDocument" persistencyKey="SmartFilterBarPersistenceKey"
+				considerSelectionVariants="true">
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration index="0" key="eDocumentSourceKey" visibleInAdvancedArea="true" label="Document ID">
+						<smartFilterBar:defaultFilterValues></smartFilterBar:defaultFilterValues>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration key="ProcessStatus" visibleInAdvancedArea="true" label="Process Status">
+						<smartFilterBar:defaultFilterValues></smartFilterBar:defaultFilterValues>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration key="SourceType" visibleInAdvancedArea="true" label="EDocument Source Type">
+						<smartFilterBar:defaultFilterValues></smartFilterBar:defaultFilterValues>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration key="eDocumentType" visibleInAdvancedArea="true" label="EDocument Type">
+						<smartFilterBar:defaultFilterValues></smartFilterBar:defaultFilterValues>
+					</smartFilterBar:ControlConfiguration>
+				</smartFilterBar:controlConfiguration>
+				<HBox>
+					<mc:RadialMicroChart size="M" percentage="15" press="press" class="sapUiTinyMargin" valueColor="Good"
+						tooltip="Percentage of eDocuments on Blockchain"></mc:RadialMicroChart>
+					<mc:BulletMicroChart size="M" scale=" eDocs" targetValue="254" forecastValue="254" class="sapUiTinyMargin" press="press"
+						tooltip="Number of eDocuments on Blockchain: 8">
+						<mc:actual>
+							<mc:BulletMicroChartData value="8" color="Good"/>
+						</mc:actual>
+						<mc:thresholds>
+							<mc:BulletMicroChartData tooltip="" value="0" color="Error"/>
+							<mc:BulletMicroChartData tooltip="" value="50" color="Critical"/>
+							<mc:BulletMicroChartData tooltip="" value="100" color="Critical"/>
+							<mc:BulletMicroChartData tooltip="" value="200" color="Error"/>
+						</mc:thresholds>
+					</mc:BulletMicroChart>
+				</HBox>
+			</smartFilterBar:SmartFilterBar>
+			<smartTable:SmartTable class="sapUiResponsiveMargin" id="ismartTableId" smartFilterId="ismartFilterBarId" useTablePersonalisation="true"
+				entitySet="ZC2R_C_HashedDocument" header="Document List" showRowCount="true" enableAutoBinding="true" showFullScreenButton="true"
+				useExportToExcel="true" persistencyKey="CustomerData" beforeRebindTable="onFilterChange" tableType="ResponsiveTable"
+				useVariantManagement="true" showVariantManagement="true"
+				requestAtLeastFields="Guid,eDocumentSourceKey,EDocumentTypeDescription,ProcessStatusDescription,SourceTypeDescription,NetValue,OnBlockchain"
+				initiallyVisibleFields="eDocumentSourceKey,EDocumentTypeDescription,ProcessStatusDescription,SourceTypeDescription,NetValue,OnBlockchain">
+				<Table itemPress="onNavtoDocsOverview" growing="true" sticky="ColumnHeaders" selectionChange="onAllCmsSelChange">
+					<columns>
+						<Column hAlign="Begin" vAlign="Middle">
+							<customData>
+								<core:CustomData key="p13nData"
+									value="\{&quot;columnKey&quot;: &quot;OnBlockchain&quot;, &quot;columnIndex&quot;:&quot;5&quot;, &quot;leadingProperty&quot;: &quot;OnBlockchain&quot;}"/>
+							</customData>
+							<Text text="On Blockchain"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Navigation">
+							<cells>
+								<core:Icon src="{= ${OnBlockchain} ? 'sap-icon://sys-enter-2' : 'sap-icon://error'}" color="{= ${OnBlockchain} ? '#2B7D2B' : '#BB0000'}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</smartTable:SmartTable>
+		</content>
+	</Page>
+	<!--		</pages>-->
+	<!--	</App>-->
+	<!--</Shell>-->
+</mvc:View>
